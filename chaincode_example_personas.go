@@ -57,6 +57,11 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string
 
 //Funcion Invoke para escribir o modificar informacion en el Ledger
 func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
+	
+}
+
+//Funcion Invoke para escribir o modificar informacion en el Ledger
+func (t *SimpleChaincode) registra(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
 	var idPersona string // ID de la persona
 	var datosPersona string // Datos de la Persona
 	var err error
