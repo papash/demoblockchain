@@ -61,34 +61,27 @@ func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function stri
 }
 
 //Funcion Invoke para escribir o modificar informacion en el Ledger
-func (t *SimpleChaincode) registra(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
+func (t *SimpleChaincode) registra(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
 	var idPersona string // ID de la persona
 	var datosPersona string // Datos de la Persona
 	var err error
+	
+	if len(args) != 2 {
+		return nil, errors.New("Cantidad de argumentos invalida. Se esperan 2.")
+	}
 
-	if function == "nuevo" {
-		if len(args) != 2 {
-			return nil, errors.New("Cantidad de argumentos invalida. Se esperan 2.")
-		}
-		
-		//Obtenemos el id de la persona que viene en la posicion cero de los argumentos.
-		idPersona = args[0]
-		datosPersona = args[1]
-		
-		// Escribimos la persona en el Ledger
-		err = stub.PutState(idPersona, []byte(datosPersona))
-		if err != nil {
-			return nil, err
-		}
-	
-		//Generamos el texto que se va mostrar en la columna Payload del Blockchain.
-		fmt.Printf("Nueva persona con idPersona = %v, y datosPersona = %v\n", idPersona, datosPersona)
+	//Obtenemos el id de la persona que viene en la posicion cero de los argumentos.
+	idPersona = args[0]
+	datosPersona = args[1]
+
+	// Escribimos la persona en el Ledger
+	err = stub.PutState(idPersona, []byte(datosPersona))
+	if err != nil {
+		return nil, err
 	}
-	
-	//Implementar la funcion "modifica"
-	if function == "modifica" {
-			
-	}
+
+	//Generamos el texto que se va mostrar en la columna Payload del Blockchain.
+	fmt.Printf("Nueva persona con idPersona = %v, y datosPersona = %v\n", idPersona, datosPersona)
 
 	return nil, nil
 }
