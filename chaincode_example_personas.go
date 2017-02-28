@@ -33,10 +33,15 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string
 	var idPersona string // ID de la persona
 	var datosPersona string // Datos de la Persona
 	var err error
-		
+	
+	//Se espera que vengan dos valores
+	if len(args) != 2 {
+		return nil, errors.New("Cantidad de argumentos invalida. Se esperan 2.")
+	}
+
 	//Obtenemos el id de la persona que viene en la posicion cero de los argumentos.
-	idPersona = "Genesis"
-	datosPersona = "Genesis"	
+	idPersona = args[0]
+	datosPersona = args[1]	
 
 	// Escribimos la persona en el Ledger
 	err = stub.PutState(idPersona, []byte(datosPersona))
