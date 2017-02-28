@@ -57,7 +57,7 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string
 
 //Funcion Invoke para escribir o modificar informacion en el Ledger
 func (t *SimpleChaincode) Invoke(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
-	
+	return nil, nil
 }
 
 //Funcion Invoke para escribir o modificar informacion en el Ledger
